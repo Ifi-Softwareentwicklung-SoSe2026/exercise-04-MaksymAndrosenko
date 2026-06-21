@@ -425,38 +425,39 @@ Hier bitte den Code aus `robots_exercise` in ein UML Diagramm überführen.
 
 
 @startuml
+
+interface ISerializer {
+    + SpeichernAlsJSON(dateipfad: string): void
+    {static} + LadenAusJSON(dateipfad: string): Roboter
+    + SpeichernAlsCSV(dateipfad: string): void
+    {static} + LadenAusCSV(dateipfad: string): Roboter
+}
+
 class Roboter {
-+ Name: string
-+ Typ: string
-+ Energielevel: int
-+ SpeichernAlsCSV(): void
-+ LadenAusCSV(): Roboter
-+ SpeichernAlsJSON(): void
-+ LadenAusJSON(): Roboter
-+ GetStatus(): void
-+ Activate(); void
+    + Name: string
+    + Typ: string
+    + Energielevel: int
+
+    + SpeichernAlsCSV(dateipfad: string): void
+    {static} + LadenAusCSV(dateipfad: string): Roboter
+
+    + SpeichernAlsJSON(dateipfad: string): void
+    {static} + LadenAusJSON(dateipfad: string): Roboter
+
+    + GetStatus(): string
+    + Activate(): void
 }
 
-interface ISerializer
-{
-+ SpeichernAlsCSV(): void
-+ LadenAusCSV(): Roboter
-+ SpeichernAlsJSON(): void
-+ LadenAusJSON(): Roboter
+class Lieferroboter {
+    + Lieferkapazität: int
+    + GetStatus(): string
 }
 
-class Lieferroboter
-{
-+ Lieferkapazität: int
-+ GetStatus(): void
-}
-
-Roboter <|-- Lieferroboter
 ISerializer <|.. Roboter
-Roboter *-- Lieferroboter
-
+Roboter <|-- Lieferroboter
 
 @enduml
+
 ```
 @plantUML.eval(png)
 
